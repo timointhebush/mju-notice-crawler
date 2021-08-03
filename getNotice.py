@@ -1,3 +1,4 @@
+import configparser
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
 from datetime import date
@@ -18,8 +19,13 @@ noticeName = ["코로나19종합공지", '학사공지', '일반공지', '장학
 
 today = date.today().isoformat()
 
-#원하는 경로 입력
-fileName = "/Users/timointhebush/OneDrive - 명지대학교/00.MJU/21년 단과대학 학생회/공지사항 스크랩/" + today + "공지사항.txt"
+# config.ini 파일에 경로 작성
+config = configparser.ConfigParser()
+config.read('./config.ini')
+storage_path = config['STORAGE']['STORAGE_PATH']
+
+#파일 이름 설정
+fileName = storage_path + today + "공지사항.txt"
 
 f = open(fileName, 'w')
 
